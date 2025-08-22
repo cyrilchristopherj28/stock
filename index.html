@@ -2,28 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Company Score Prototype</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credit Intelligence Prototype</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="container">
-    <h1>📊 Company Score Prototype</h1>
+    <h1>📊 Credit Intelligence Prototype</h1>
+    <p class="note">
+      Available Companies: Reliance, Tata, Infosys, Wipro, HDFC, ICICI, Adani
+    </p>
+    <div class="search">
+      <input type="text" id="companyInput" placeholder="Enter company name (e.g., Reliance)">
+      <button onclick="getScore()">Get Score</button>
+    </div>
 
-    <input type="text" id="companyInput" placeholder="Enter company name...">
-    <button onclick="fetchScore()">Get Score</button>
-
-    <div id="result" class="hidden">
+    <div id="result" class="result hidden">
       <h2 id="companyName"></h2>
-      <div class="score-card" id="scoreCard">Score: <span id="score"></span></div>
-      
-      <canvas id="factorsChart" width="400" height="200"></canvas>
-
-      <h3>📰 Recent News</h3>
-      <ul id="newsList"></ul>
+      <div class="score-card">
+        <p>Credit Score: <span id="creditScore"></span></p>
+      </div>
+      <canvas id="factorChart"></canvas>
+      <div id="newsSection">
+        <h3>Latest News</h3>
+        <ul id="newsList"></ul>
+      </div>
     </div>
   </div>
 
   <script src="app.js"></script>
 </body>
 </html>
+
