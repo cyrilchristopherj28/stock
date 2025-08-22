@@ -1,68 +1,103 @@
-// Dummy data
-const dummyData = {
+const data = {
   "Reliance": {
-    "company": "Reliance",
-    "score": 82,
-    "factors": { "Debt": -12, "Volatility": -8, "Sentiment": 2 },
-    "news": [
-      {"headline": "Reliance launches 5G", "sentiment": "positive"},
-      {"headline": "Reliance debt rises", "sentiment": "negative"}
+    score: 82,
+    factors: { debt: -12, volatility: -8, sentiment: +2 },
+    news: [
+      { headline: "Reliance launches 5G services", sentiment: "positive" },
+      { headline: "Reliance debt rises in Q2", sentiment: "negative" }
     ]
   },
   "Tata": {
-    "company": "Tata",
-    "score": 70,
-    "factors": { "Debt": -5, "Volatility": -10, "Sentiment": 15 },
-    "news": [
-      {"headline": "Tata invests in EVs", "sentiment": "positive"},
-      {"headline": "Tata steel demand drops", "sentiment": "negative"}
+    score: 75,
+    factors: { debt: -10, volatility: -5, sentiment: +5 },
+    news: [
+      { headline: "Tata Motors sees growth in EV sales", sentiment: "positive" },
+      { headline: "Tata Steel faces global slowdown", sentiment: "negative" }
+    ]
+  },
+  "Infosys": {
+    score: 88,
+    factors: { debt: +5, volatility: -3, sentiment: +6 },
+    news: [
+      { headline: "Infosys secures new IT contracts", sentiment: "positive" },
+      { headline: "IT sector facing attrition issues", sentiment: "negative" }
+    ]
+  },
+  "Wipro": {
+    score: 68,
+    factors: { debt: -8, volatility: -7, sentiment: -2 },
+    news: [
+      { headline: "Wipro launches AI solutions", sentiment: "positive" },
+      { headline: "Wipro revenue growth slows", sentiment: "negative" }
+    ]
+  },
+  "HDFC": {
+    score: 80,
+    factors: { debt: -5, volatility: -4, sentiment: +3 },
+    news: [
+      { headline: "HDFC Bank posts strong quarterly results", sentiment: "positive" },
+      { headline: "RBI policies impact loan margins", sentiment: "negative" }
+    ]
+  },
+  "ICICI": {
+    score: 77,
+    factors: { debt: -6, volatility: -6, sentiment: +4 },
+    news: [
+      { headline: "ICICI expands digital banking services", sentiment: "positive" },
+      { headline: "Banking stocks face market correction", sentiment: "negative" }
+    ]
+  },
+  "Adani": {
+    score: 60,
+    factors: { debt: -20, volatility: -15, sentiment: -5 },
+    news: [
+      { headline: "Adani Group invests in green energy", sentiment: "positive" },
+      { headline: "Adani faces scrutiny over debt levels", sentiment: "negative" }
     ]
   }
 };
 
 let chartInstance;
 
-function fetchScore() {
+function getScore() {
   const company = document.getElementById("companyInput").value.trim();
-  const data = dummyData[company];
+  const resultDiv = document.getElementById("result");
+  const companyName = document.getElementById("companyName");
+  const creditScore = document.getElementById("creditScore");
+  const newsList = document.getElementById("newsList");
 
-  if (!data) {
-    alert("No data found. Try 'Reliance' or 'Tata'");
+  if (!data[company]) {
+    alert("Company not found. Please try one from the list.");
     return;
   }
 
-  document.getElementById("result").classList.remove("hidden");
-  document.getElementById("companyName").innerText = data.company;
-  document.getElementById("score").innerText = data.score;
+  const companyData = data[company];
+  resultDiv.classList.remove("hidden");
+  companyName.textContent = company;
+  creditScore.textContent = companyData.score;
 
-  // Score card color
-  const scoreCard = document.getElementById("scoreCard");
-  if (data.score >= 75) scoreCard.style.background = "#c8f7c5";
-  else if (data.score >= 50) scoreCard.style.background = "#fff6a5";
-  else scoreCard.style.background = "#f7c5c5";
-
-  // Chart
-  const ctx = document.getElementById("factorsChart").getContext("2d");
+  // Update Chart
+  const ctx = document.getElementById("factorChart").getContext("2d");
   if (chartInstance) chartInstance.destroy();
   chartInstance = new Chart(ctx, {
-    type: "bar",
+    type: 'bar',
     data: {
-      labels: Object.keys(data.factors),
+      labels: Object.keys(companyData.factors),
       datasets: [{
         label: "Factor Impact",
-        data: Object.values(data.factors),
-        backgroundColor: ["#ff9999", "#9999ff", "#99ff99"]
+        data: Object.values(companyData.factors),
+        backgroundColor: ["#007bff", "#ffc107", "#28a745"]
       }]
     }
   });
 
-  // News list
-  const newsList = document.getElementById("newsList");
+  // Update News
   newsList.innerHTML = "";
-  data.news.forEach(n => {
+  companyData.news.forEach(n => {
     const li = document.createElement("li");
-    li.innerText = n.headline;
-    li.className = n.sentiment === "positive" ? "positive" : "negative";
+    li.textContent = n.headline;
+    li.classList.add(n.sentiment === "positive" ? "positive" : "negative");
     newsList.appendChild(li);
   });
 }
+
