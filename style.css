@@ -1,45 +1,88 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f9f9f9;
-  padding: 20px;
-  text-align: center;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-  max-width: 600px;
+  width: 80%;
   margin: auto;
-  background: white;
+  text-align: center;
   padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-input, button {
+h1 {
+  color: #333;
+}
+
+.note {
+  font-size: 14px;
+  margin-bottom: 15px;
+  color: #555;
+}
+
+.search input {
   padding: 10px;
-  margin: 10px 0;
+  width: 250px;
+  font-size: 16px;
 }
 
-button {
-  background: #0077ff;
+.search button {
+  padding: 10px 15px;
+  font-size: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+  background: #007bff;
   color: white;
   border: none;
-  cursor: pointer;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
-button:hover {
-  background: #005fcc;
+.result {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.hidden {
+  display: none;
 }
 
 .score-card {
-  font-size: 20px;
-  font-weight: bold;
-  padding: 10px;
-  margin: 15px 0;
+  background: #e3f2fd;
+  padding: 15px;
   border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 18px;
 }
 
-.hidden { display: none; }
+#creditScore {
+  font-weight: bold;
+  color: #007bff;
+}
 
-.positive { color: green; }
-.negative { color: red; }
+#newsSection {
+  margin-top: 20px;
+}
+
+#newsList {
+  list-style-type: none;
+  padding: 0;
+}
+
+#newsList li {
+  background: #fff;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-left: 5px solid;
+  border-radius: 5px;
+}
+
+.positive {
+  border-color: green;
+}
+
+.negative {
+  border-color: red;
+}
+
